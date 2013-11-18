@@ -6,6 +6,10 @@ use warnings;
 use Mojo::UserAgent;
 use Mojo::DOM;
 
+#Config
+my $out = 'dobro24ru'; #Output filename
+my $media = 'media'; #Directory for media files
+
 my $ua = Mojo::UserAgent->new;
 my $imgsrc = Mojo::UserAgent->new;
 my $dom = Mojo::DOM->new;
@@ -21,7 +25,7 @@ $dom->find('div.detka_')->each(sub{
 	$content[0] = $_->find('img[src]')->attr('src');
 	my $img_path = $content[0];
 	$content[0]=~s/.*publ\///; #Clear image filename
-	#$imgsrc->max_redirects(5)->get("http://www.dobro24.ru$img_path" => {DNT=>1})->res->content->asset->move_to("media/$content[0].jpeg");
+	$imgsrc->max_redirects(5)->get("http://www.dobro24.ru$img_path" => {DNT=>1})->res->content->asset->move_to("$media/$content[0].jpeg");
 
 	#Title
 	$content[1] = $_->find('img[src]')->attr('alt');
@@ -43,7 +47,7 @@ $dom->find('div.detka_')->each(sub{
 });
 
 
-open (FILE,'>', 'dobro24ru') || die "Cannot open file to write";
+open (FILE,'>', $out) || die "Cannot open file to write";
 print FILE @parse_content;
 close FILE;
 
