@@ -25,7 +25,7 @@ $dom->find('div.detka_')->each(sub{
 	$content[0] = $_->find('img[src]')->attr('src');
 	my $img_path = $content[0];
 	$content[0]=~s/.*publ\///; #Clear image filename
-	$imgsrc->max_redirects(5)->get("http://www.dobro24.ru$img_path" => {DNT=>1})->res->content->asset->move_to("$media/$content[0].jpeg");
+	$imgsrc->max_redirects(5)->get("http://www.dobro24.ru$img_path" => {DNT=>1})->res->content->asset->move_to("$media/$content[0].jpg");
 
 	#Title
 	$content[1] = $_->find('img[src]')->attr('alt');
