@@ -14,7 +14,7 @@ my $ua = Mojo::UserAgent->new;
 my $imgsrc = Mojo::UserAgent->new;
 my $dom = Mojo::DOM->new;
 
-$dom = $ua->get('http://www.dobro24.ru')->res->dom;
+$dom = $ua->get('http://dobro24.ru')->res->dom;
 
 my @content = ();
 my @parse_content = ();
